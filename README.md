@@ -1,3 +1,5 @@
+[![Gem Version](https://badge.fury.io/rb/dawn.svg)](https://badge.fury.io/rb/dawn)
+[![Maintainability](https://api.codeclimate.com/v1/badges/e7246fe169a534491e50/maintainability)](https://codeclimate.com/github/eliav-lavi/dawn/maintainability)
 [![Build Status](https://travis-ci.org/eliav-lavi/dawn.svg?branch=master)](https://travis-ci.org/eliav-lavi/dawn)
 
 # Dawn
