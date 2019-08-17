@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Eliav Lavi"]
   spec.email         = ["eliavlavi@gmail.com"]
 
-  spec.summary       = %q{A Utility for Objects Initialization for Dependency Injection Purposes}
-  # spec.description   = %q{TODO: Write a longer description or delete this line.}
-  # spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{A Object Initialization Utility for Dependency Injection Based Design Purposes}
+  spec.description   = %q{A a simple and intuitive instances container for Ruby. Dawn helps in managing re-usable instances in an application, without having to recreate them upon each request. }
+  spec.homepage      = "https://github.com/eliav-lavi/dawn"
   spec.license       = "MIT"
 
   spec.files         = Dir.chdir(File.expand_path('..', __FILE__)) do
