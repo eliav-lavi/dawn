@@ -52,7 +52,7 @@ Assuming some `FooService` class:
 ```ruby
 class FooService
   def call
-      # Return some value / do something
+    # Return some value / do something
   end
 end
 ```
@@ -70,16 +70,16 @@ Or as injected dependency:
 ```ruby
 class BarService
   def self.build
-      foo_service = FooService.new
-      new(foo_service: foo_service)
+    foo_service = FooService.new
+    new(foo_service: foo_service)
   end
 
   def initialize(foo_service:)
-      @foo_service = foo_service
+    @foo_service = foo_service
   end
 
   def call
-      @foo_service.call
+    @foo_service.call
   end
 end
 ```
