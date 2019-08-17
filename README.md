@@ -26,9 +26,9 @@ You can build a `Dawn` container with multiple namespaces, each namespace having
 ```ruby
 # Assuming instance_a and instance_b were just initialized:
 foo_namespace_request = Dawn::Namespace::Request.new(name: :foo) do |namespace|
-    namespace
-        .set(key: :instance_a, instance: instance_a)
-        .set(key: :instance_b, instance: instance_b)
+  namespace
+    .set(key: :instance_a, instance: instance_a)
+    .set(key: :instance_b, instance: instance_b)
 end
 
 CONTAINER = Dawn::Container.build([foo_namespace_request])
@@ -51,35 +51,36 @@ Assuming some `FooService` class:
 
 ```ruby
 class FooService
-    def call
-        # Return some value / do something
-    end
+  def call
+      # Return some value / do something
+  end
 end
 ```
 
 We can use it as a dependency in another class, `BarService` in two ways. Either directly, as an hard-coded dependency:
 ```ruby
 class BarService
-    def call
-        FooService.new.call
-    end
+  def call
+    FooService.new.call
+  end
 end
 ```
 
 Or as injected dependency:
 ```ruby
 class BarService
-    def self.build
-        foo_service = FooService.new
-        new(foo_service: foo_service)
-    end
+  def self.build
+      foo_service = FooService.new
+      new(foo_service: foo_service)
+  end
 
-    def initialize(foo_service:)
-        @foo_service = foo_service
-    end
-    def call
-        @foo_service.call
-    end
+  def initialize(foo_service:)
+      @foo_service = foo_service
+  end
+
+  def call
+      @foo_service.call
+  end
 end
 ```
 
@@ -95,26 +96,26 @@ While we cannot change this behaviour of Rails - a new controller instance will 
 For example, let's assume some `ChargesController`, whose `#create` method needs to pass request's data to some `ChargeCreationService`. Usually, the implementation would look like this:
 ```ruby
 class ChargesController < ApplicationController
-    def create
-        ChargeCreationService.new.call(params[:charge])
+  def create
+    ChargeCreationService.new.call(params[:charge])
 
-        # Note: In this manner, ChargeCreationService instances have no members / instance variables.
-        # Some people also do the following, which might feel slicker at first:
-        # ChargeCreationService.new(params[:charge]).call
-        # Honestly, assuming ChargeCreationService has dependencies of it's own, both feel wrong to me.
-    end
+    # Note: In this manner, ChargeCreationService instances have no members / instance variables.
+    # Some people also do the following, which might feel slicker at first:
+    # ChargeCreationService.new(params[:charge]).call
+    # Honestly, assuming ChargeCreationService has dependencies of it's own, both feel wrong to me.
+  end
 end
 ```
 
 With `Dawn` we can do this:
 ```ruby
 class ChargesController < ApplicationController
-    def create
-        # Assuming we initialized a proper Dawn container in the initialization stages of our application, and assigned it the the global const CONTAINER:
+  def create
+    # Assuming we initialized a proper Dawn container in the initialization stages of our application, and assigned it the the global const CONTAINER:
 
-        service = CONTAINER.fetch(namespace: :charges, key: :creation_service)
-        service.call(params[:charge])
-    end
+    service = CONTAINER.fetch(namespace: :charges, key: :creation_service)
+    service.call(params[:charge])
+  end
 end
 ```
 
