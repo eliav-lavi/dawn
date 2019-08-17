@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/eliav-lavi/dawn.svg?branch=master)](https://travis-ci.org/eliav-lavi/dawn)
+
 # Dawn
 `Dawn` is a simple and intuitive instances container for Ruby. It was born out of the need to reference existing application instances in Rails controllers, without having to re-initialize them upon each controller call or using the singleton pattern; however, while `Dawn` can be used in a Rails app, it may fit any Ruby application that is built with dependency injection in mind.
 
