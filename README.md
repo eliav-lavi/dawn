@@ -1,8 +1,8 @@
+# Dawn: An Instances Container for Ruby
 [![Gem Version](https://badge.fury.io/rb/dawn.svg)](https://badge.fury.io/rb/dawn)
 [![Maintainability](https://api.codeclimate.com/v1/badges/e7246fe169a534491e50/maintainability)](https://codeclimate.com/github/eliav-lavi/dawn/maintainability)
 [![Build Status](https://travis-ci.org/eliav-lavi/dawn.svg?branch=master)](https://travis-ci.org/eliav-lavi/dawn)
 
-# Dawn
 `Dawn` is a simple and intuitive instances container for Ruby. It was born out of the need to reference existing application instances in Rails controllers, without having to re-initialize them upon each controller call or using the singleton pattern; however, while `Dawn` can be used in a Rails app, it may fit any Ruby application that is built with dependency injection in mind.
 
 ## Installation
