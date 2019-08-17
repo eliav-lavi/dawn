@@ -94,28 +94,28 @@ While we cannot change this behaviour of Rails - a new controller instance will 
 
 For example, let's assume some `ChargesController`, whose `#create` method needs to pass request's data to some `ChargeCreationService`. Usually, the implementation would look like this:
 ```ruby
-    class ChargesController < ApplicationController
-        def create
-            ChargeCreationService.new.call(params[:charge])
-            
-            # Note: In this manner, ChargeCreationService instances have no members / instance variables.
-            # Some people also do the following, which might feel slicker at first:
-            # ChargeCreationService.new(params[:charge]).call
-            # Honestly, assuming ChargeCreationService has dependencies of it's own, both feel wrong to me.
-        end
+class ChargesController < ApplicationController
+    def create
+        ChargeCreationService.new.call(params[:charge])
+
+        # Note: In this manner, ChargeCreationService instances have no members / instance variables.
+        # Some people also do the following, which might feel slicker at first:
+        # ChargeCreationService.new(params[:charge]).call
+        # Honestly, assuming ChargeCreationService has dependencies of it's own, both feel wrong to me.
     end
+end
 ```
 
 With `Dawn` we can do this:
 ```ruby
-    class ChargesController < ApplicationController
-        def create
-            # Assuming we initialized a proper Dawn container in the initialization stages of our application, and assigned it the the global const CONTAINER:
+class ChargesController < ApplicationController
+    def create
+        # Assuming we initialized a proper Dawn container in the initialization stages of our application, and assigned it the the global const CONTAINER:
 
-            service = CONTAINER.fetch(namespace: :charges, key: :creation_service)
-            service.call(params[:charge])
-        end
+        service = CONTAINER.fetch(namespace: :charges, key: :creation_service)
+        service.call(params[:charge])
     end
+end
 ```
 
 Rails offers the `after_initialize` hook that you can use in `application.rb` - this is a proper place to initialize your `Dawn::Container`. In the previous example, I have referenced it from the top level contsant `CONTAINER`, which could be assigned there. See [here](https://guides.rubyonrails.org/configuring.html#rails-general-configuration) for more info on `after_initialize`.
