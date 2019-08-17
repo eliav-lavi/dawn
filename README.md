@@ -33,12 +33,14 @@ end
 
 CONTAINER = Dawn::Container.build([foo_namespace_request])
 ```
+Note: the block passed to `Dawn::Namespace::Request#new` only gets evaluated once used within `Dawn::Container.build`.
 
 Later, you may fetch instances from the container:
 ```ruby
 CONTAINER.fetch(namespace: foo, key: :instance_a)
 ```
-![](https://i.imgur.com/GFEKDlh.png)
+
+<img src="https://i.imgur.com/GFEKDlh.png" width="25%" height="25%">
 
 ### Dependency Injection Based Applications
 Since `Dawn` was created to support the development of dependency injection based application, I will briefly discuss this topic in this section. Usage in Rails will be clearer hence.
