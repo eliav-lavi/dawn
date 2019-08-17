@@ -1,4 +1,6 @@
 require 'dawn/version'
+require 'dawn/container'
+require 'dawn/namespace/request'
 
 module Dawn
   class Error < StandardError
